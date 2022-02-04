@@ -1,8 +1,12 @@
 <template>
   <div id="app">
     <!-- <router-view/> -->
-    <show-score></show-score>
-    <ref-panel></ref-panel>
+    <show-score
+      :quarterInfo="quarterInfo"
+    ></show-score>
+    <ref-panel
+      :quarterInfo="quarterInfo"
+    ></ref-panel>
   </div>
 </template>
 
@@ -15,6 +19,14 @@ export default {
   components: {
     ShowScore,
     RefPanel
+  },
+  data () {
+    return {
+      quarterInfo: {
+        quarter: [1, 2, 3, 4],
+        quarterTime: 65
+      }
+    }
   }
 }
 </script>
