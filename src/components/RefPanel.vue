@@ -10,7 +10,10 @@
       <button>+2</button>
       <button>+3</button>
     </div>
-    <button id="puase">Puase</button>
+    <button
+      id="puase"
+      @click="handlePauseClick"
+    >Pause</button>
     <div class="select">
       <span>Quarter</span>
       <select v-model="selected">
@@ -29,45 +32,43 @@
 </template>
 
 <script>
+import { myMixin } from './mixins.js'
+
 export default {
   name: 'RefPanel',
   props: {
     quarterInfo: Object
   },
+  mixins: [myMixin],
   data () {
     return {
       selected: [],
-      disabled: false
+      disabled: false,
+      pause: false,
+      timer: 0
     }
   },
   methods: {
     handleStartClick () {
       let quarterTime = this.quarterInfo.quarterTime
-
-      // formating time
-      function formatTime (time) {
-        let min = Math.floor(time / 60)
-        let sec = ('0' + Math.floor(time % 60)).slice(-2)
-
-        return `${min} : ${sec}`
-      }
+      this.disabled = true
 
       // counter
-      let timer = setInterval(() => {
-        this.disabled = true
-        if (quarterTime > 0) {
-          quarterTime = (quarterTime - 0.1).toFixed(1)
-          if (quarterTime < 60) {
-            this.quarterInfo.quarterTime = quarterTime
-          } else {
-            this.quarterInfo.quarterTime = formatTime(quarterTime)
-          }
-        } else {
-          clearInterval(timer)
-          this.disabled = false
-          quarterTime = 720
-        }
-      }, 100)
+      this.timer = setInterval(this.runTimer(quarterTime), 1000)
+    },
+    handlePauseClick () {
+      let remainingTime = this.quarterInfo.quarterTime
+      console.log(remainingTime)
+      const pauseBtn = document.querySelector('#puase')
+
+      if (!this.pause) {
+        this.pause = true
+        pauseBtn.innerHTML = 'Resume'
+        clearInterval(this.timer)
+      } else {
+        this.pause = false
+        pauseBtn.innerHTML = 'Pause'
+      }
     }
   }
 }

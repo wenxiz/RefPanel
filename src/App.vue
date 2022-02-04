@@ -24,14 +24,13 @@ export default {
     return {
       quarterInfo: {
         quarter: [1, 2, 3, 4],
-        quarterTime: 65
+        quarterTime: 10
       }
     }
   }
 }
 </script>
 
-    ShowScore
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
