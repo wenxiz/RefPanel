@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="home">
-      <button>+1</button>
-      <button>+2</button>
-      <button>+3</button>
+      <button @click="handlePtsClick(homeTeam, 1)">+1</button>
+      <button @click="handlePtsClick(homeTeam, 2)">+2</button>
+      <button @click="handlePtsClick(homeTeam, 3)">+3</button>
     </div>
     <div class="away">
-      <button>+1</button>
-      <button>+2</button>
-      <button>+3</button>
+      <button @click="handlePtsClick(awayTeam, 1)">+1</button>
+      <button @click="handlePtsClick(awayTeam, 2)">+2</button>
+      <button @click="handlePtsClick(awayTeam, 3)">+3</button>
     </div>
     <button
       id="puase"
@@ -16,7 +16,7 @@
     >Pause</button>
     <div class="select">
       <span>Quarter</span>
-      <select v-model="selected">
+      <select v-model="quarterInfo.selected">
         <option disabled value="">Select</option>
         <option
           v-for="item in quarterInfo.quarter"
@@ -37,12 +37,13 @@ import { myMixin } from './mixins.js'
 export default {
   name: 'RefPanel',
   props: {
-    quarterInfo: Object
+    quarterInfo: Object,
+    homeTeam: Object,
+    awayTeam: Object
   },
   mixins: [myMixin],
   data () {
     return {
-      selected: [],
       disabled: false,
       pause: false,
       timer: 0
@@ -69,6 +70,9 @@ export default {
         this.pause = false
         pauseBtn.innerHTML = 'Pause'
       }
+    },
+    handlePtsClick (team, pts) {
+      team.score += pts
     }
   }
 }

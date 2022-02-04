@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="home">
-      <h3 class="homeName"></h3>
+      <h3 class="homeName">{{ homeTeam.name }}</h3>
       <img src="#" alt="homeLogo">
-      <div class="homeScore"></div>
+      <div class="homeScore">{{ homeTeam.score }}</div>
     </div>
     <div class="colon">:</div>
     <div class="away">
-      <h3 class="awayName"></h3>
+      <h3 class="awayName">{{ awayTeam.name }}</h3>
       <img src="#" alt="awayLogo">
-      <div class="awayScore"></div>
+      <div class="awayScore">{{ awayTeam.score }}</div>
     </div>
-    <div class="quater">Quater</div>
+    <div class="quater">Quarter {{ quarterInfo.selected }}</div>
     <div class="timer"> {{ quarterInfo.quarterTime }}</div>
   </div>
 </template>
@@ -20,7 +20,9 @@
 export default {
   name: 'ShowScore',
   props: {
-    quarterInfo: Object
+    quarterInfo: Object,
+    homeTeam: Object,
+    awayTeam: Object
   }
 }
 </script>

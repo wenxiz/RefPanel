@@ -3,9 +3,13 @@
     <!-- <router-view/> -->
     <show-score
       :quarterInfo="quarterInfo"
+      :homeTeam="homeTeam"
+      :awayTeam="awayTeam"
     ></show-score>
     <ref-panel
       :quarterInfo="quarterInfo"
+      :homeTeam="homeTeam"
+      :awayTeam="awayTeam"
     ></ref-panel>
   </div>
 </template>
@@ -24,7 +28,18 @@ export default {
     return {
       quarterInfo: {
         quarter: [1, 2, 3, 4],
+        selected: '',
         quarterTime: 10
+      },
+      homeTeam: {
+        name: 'Miami Heat',
+        score: 10,
+        logoUrl: '#'
+      },
+      awayTeam: {
+        name: 'Los Angeles Lakers',
+        score: 12,
+        logoUrl: '#'
       }
     }
   }
