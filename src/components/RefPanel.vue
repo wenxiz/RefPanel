@@ -28,6 +28,7 @@
       :disabled='disabled'
     ><span>icon</span>Start</button>
     <button id="undo">Undo</button>
+    {{ formattedTime }}
   </div>
 </template>
 
@@ -46,20 +47,17 @@ export default {
     return {
       disabled: false,
       pause: false,
-      timer: 0
+      timer: 0,
+      formattedTime: this.quarterInfo.quarterTime
     }
   },
   methods: {
     handleStartClick () {
-      let quarterTime = this.quarterInfo.quarterTime
       this.disabled = true
-
       // counter
-      this.timer = setInterval(this.runTimer(quarterTime), 1000)
+      this.timer = setInterval(this.run_timer, 100)
     },
     handlePauseClick () {
-      let remainingTime = this.quarterInfo.quarterTime
-      console.log(remainingTime)
       const pauseBtn = document.querySelector('#puase')
 
       if (!this.pause) {
@@ -69,6 +67,7 @@ export default {
       } else {
         this.pause = false
         pauseBtn.innerHTML = 'Pause'
+        this.timer = setInterval(this.run_timer, 100)
       }
     },
     handlePtsClick (team, pts) {

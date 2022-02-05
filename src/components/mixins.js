@@ -6,17 +6,18 @@ export const myMixin = {
 
       return `${min} : ${sec}`
     },
-    runTimer (time) {
-      console.log(time)
-      // if (time > 0) {
-      //   time = (time - 0.1).toFixed(1)
-      //   if (time < 60) {
-      //     this.quarterInfo.quarterTime = time
-      //   } else {
-      //     clearInterval(this.timer)
-      //     this.quarterInfo.quarterTime = 720
-      //   }
-      // }
+    run_timer () {
+      if (this.formattedTime <= 0) {
+        clearInterval(this.timer)
+        this.disable = false
+      } else {
+        this.formattedTime = (this.formattedTime - 0.1).toFixed(1)
+        if (this.formattedTime > 60) {
+          this.quarterInfo.quarterTime = this.formatTime(this.formattedTime)
+        } else {
+          this.quarterInfo.quarterTime = this.formattedTime
+        }
+      }
     }
   }
 }
