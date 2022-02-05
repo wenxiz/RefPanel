@@ -1,4 +1,9 @@
 export const myMixin = {
+  data () {
+    return {
+      action: []
+    }
+  },
   methods: {
     formatTime (time) {
       let min = Math.floor(time / 60)
@@ -9,7 +14,7 @@ export const myMixin = {
     run_timer () {
       if (this.formattedTime <= 0) {
         clearInterval(this.timer)
-        this.disable = false
+        this.disabled = false
       } else {
         this.formattedTime = (this.formattedTime - 0.1).toFixed(1)
         if (this.formattedTime > 60) {

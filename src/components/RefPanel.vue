@@ -27,8 +27,9 @@
       @click="handleStartClick"
       :disabled='disabled'
     ><span>icon</span>Start</button>
-    <button id="undo">Undo</button>
-    {{ formattedTime }}
+    <button
+      id="undo"
+      @click="handleUndoClick">Undo</button>
   </div>
 </template>
 
@@ -71,7 +72,21 @@ export default {
       }
     },
     handlePtsClick (team, pts) {
+      // record each action
+      this.action.push({team, pts})
       team.score += pts
+      console.log(this.action)
+    },
+    handleUndoClick () {
+      if (this.action.length !== 0) {
+        // undo scores
+        const lastAction = this.action[this.action.length - 1]
+        lastAction.team.score -= lastAction.pts
+        // remove action from this.action
+        this.action.pop()
+      } else {
+        alert('There is nothing you can undo!')
+      }
     }
   }
 }
