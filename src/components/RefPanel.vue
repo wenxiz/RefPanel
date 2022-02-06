@@ -1,35 +1,38 @@
 <template>
-  <div>
-    <div class="home">
+  <div class="panel">
+    <div class="addPts">
       <button @click="handlePtsClick(homeTeam, 1)">+1</button>
       <button @click="handlePtsClick(homeTeam, 2)">+2</button>
       <button @click="handlePtsClick(homeTeam, 3)">+3</button>
     </div>
-    <div class="away">
+    <div class="control">
+      <button
+        id="puase"
+        @click="handlePauseClick"
+      >Pause</button>
+      <div class="select">
+        <span>Quarter</span>
+        <select v-model="quarterInfo.selected">
+          <option disabled value="">Select</option>
+          <option
+            v-for="item in quarterInfo.quarter"
+            :key="item.index">{{ item }}</option>
+        </select>
+      </div>
+      <button id="start"
+        @click="handleStartClick"
+        :disabled='disabled'
+      ><span class="iconfont select iconPlay">&#xe68a;</span>Start</button>
+      <button
+        id="undo"
+        @click="handleUndoClick"
+      >Undo</button>
+    </div>
+    <div class="addPts">
       <button @click="handlePtsClick(awayTeam, 1)">+1</button>
       <button @click="handlePtsClick(awayTeam, 2)">+2</button>
       <button @click="handlePtsClick(awayTeam, 3)">+3</button>
     </div>
-    <button
-      id="puase"
-      @click="handlePauseClick"
-    >Pause</button>
-    <div class="select">
-      <span>Quarter</span>
-      <select v-model="quarterInfo.selected">
-        <option disabled value="">Select</option>
-        <option
-          v-for="item in quarterInfo.quarter"
-          :key="item.index">{{ item }}</option>
-      </select>
-    </div>
-    <button id="start"
-      @click="handleStartClick"
-      :disabled='disabled'
-    ><span>icon</span>Start</button>
-    <button
-      id="undo"
-      @click="handleUndoClick">Undo</button>
   </div>
 </template>
 
@@ -91,3 +94,35 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .panel {
+    width: 100%;
+    height: 15rem;
+    border: 5px solid red;
+    border-radius: 1rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-around;
+  }
+  .addPts, .control {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  button {
+    width: 7rem;
+    height: 3rem;
+    font-size: 1.5rem;
+  }
+  .select {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .iconPlay {
+    margin-left: -.5rem;
+    margin-right: 1.2rem;
+  }
+</style>
