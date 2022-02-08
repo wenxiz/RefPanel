@@ -12,15 +12,15 @@ export const myMixin = {
       return `${min} : ${sec}`
     },
     run_timer () {
-      if (this.formattedTime <= 0) {
+      if (this.quarterInfo.quarterTime <= 0) {
         clearInterval(this.timer)
         this.disabled = false
       } else {
-        this.formattedTime = (this.formattedTime - 0.1).toFixed(1)
-        if (this.formattedTime > 60) {
-          this.quarterInfo.quarterTime = this.formatTime(this.formattedTime)
+        this.quarterInfo.quarterTime = (this.quarterInfo.quarterTime - 0.1).toFixed(1)
+        if (this.quarterInfo.quarterTime > 60) {
+          this.quarterInfo.formattedTime = this.formatTime(this.quarterInfo.quarterTime)
         } else {
-          this.quarterInfo.quarterTime = this.formattedTime
+          this.quarterInfo.formattedTime = this.quarterInfo.quarterTime
         }
       }
     }

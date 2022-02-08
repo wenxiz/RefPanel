@@ -7,7 +7,7 @@
     </div>
     <div class="control">
       <button
-        id="puase"
+        id="pause"
         @click="handlePauseClick"
       >Pause</button>
       <div class="select">
@@ -33,6 +33,7 @@
       <button @click="handlePtsClick(awayTeam, 2)">+2</button>
       <button @click="handlePtsClick(awayTeam, 3)">+3</button>
     </div>
+    {{this.quarterInfo.quarterTime}}
   </div>
 </template>
 
@@ -51,8 +52,7 @@ export default {
     return {
       disabled: false,
       pause: false,
-      timer: 0,
-      formattedTime: this.quarterInfo.quarterTime
+      timer: 0
     }
   },
   methods: {
@@ -62,7 +62,7 @@ export default {
       this.timer = setInterval(this.run_timer, 100)
     },
     handlePauseClick () {
-      const pauseBtn = document.querySelector('#puase')
+      const pauseBtn = document.querySelector('#pause')
 
       if (!this.pause) {
         this.pause = true

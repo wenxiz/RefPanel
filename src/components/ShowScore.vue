@@ -19,7 +19,7 @@
     </div>
     <div class="quarter">
       <div class="quaterNum">Quarter {{ quarterInfo.selected }}</div>
-      <div class="timer"> {{ quarterInfo.quarterTime }}</div>
+      <div class="timer"> {{ quarterInfo.formattedTime }}</div>
     </div>
   </div>
 </template>
