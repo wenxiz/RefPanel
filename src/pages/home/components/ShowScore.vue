@@ -19,19 +19,33 @@
     </div>
     <div class="quarter">
       <div class="quaterNum">Quarter {{ quarterInfo.selected }}</div>
-      <div class="timer"> {{ quarterInfo.formattedTime }}</div>
+      <div class="timer"> {{ quarterInfo.quarterTime | quarterTimeFilter }}</div>
     </div>
   </div>
 </template>
 
 <script>
+import { myMixin } from '@/pages/mixins.js'
 
 export default {
   name: 'ShowScore',
+  mixins: [myMixin],
   props: {
     quarterInfo: Object,
     homeTeam: Object,
     awayTeam: Object
+  },
+  filters: {
+    quarterTimeFilter (time) {
+      if (time >= 60) {
+        let min = Math.floor(time / 60)
+        let sec = ('0' + Math.floor(time % 60)).slice(-2)
+
+        return `${min} : ${sec}`
+      } else {
+        return time
+      }
+    }
   }
 }
 </script>

@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { myMixin } from './mixins.js'
+import { myMixin } from '@/pages/mixins.js'
 
 export default {
   name: 'RefPanel',
@@ -64,14 +64,16 @@ export default {
     handlePauseClick () {
       const pauseBtn = document.querySelector('#pause')
 
-      if (!this.pause) {
-        this.pause = true
-        pauseBtn.innerHTML = 'Resume'
-        clearInterval(this.timer)
-      } else {
-        this.pause = false
-        pauseBtn.innerHTML = 'Pause'
-        this.timer = setInterval(this.run_timer, 100)
+      if (this.disabled === true) {
+        if (!this.pause) {
+          this.pause = true
+          pauseBtn.innerHTML = 'Resume'
+          clearInterval(this.timer)
+        } else {
+          this.pause = false
+          pauseBtn.innerHTML = 'Pause'
+          this.timer = setInterval(this.run_timer, 100)
+        }
       }
     },
     handlePtsClick (team, pts) {
@@ -104,6 +106,7 @@ export default {
     margin-top: 2rem;
     display: flex;
     justify-content: space-around;
+    margin-bottom: 10px;
   }
   .addPts, .control {
     height: 100%;
