@@ -103,7 +103,6 @@ export default {
     height: 15rem;
     border: 5px solid red;
     border-radius: 1rem;
-    margin-top: 2rem;
     display: flex;
     justify-content: space-around;
     margin-bottom: 10px;

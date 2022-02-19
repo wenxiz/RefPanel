@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-    <ul>
+    <ul class="select-tag">
       <li
         v-for="(item, index) in buttonNames"
         :key="index"
         @click="handleBtnClick(index)">
-        <button>{{ item }}</button>
+        <button class="select-tag-button" :class="btnIndex === index ? 'btnActive' : ''">{{ item }}</button>
       </li>
     </ul>
     <user-panel
@@ -46,7 +46,6 @@ export default {
         quarter: [1, 2, 3, 4],
         selected: '1',
         quarterTime: 0
-        // formattedTime: this.formatTime(29)
       },
       homeTeam: {
         name: 'Miami Heat',
@@ -69,19 +68,18 @@ export default {
 </script>
 
 <style>
-  ul {
+  .select-tag {
     list-style: none;
     display: flex;
     justify-content: center;
   }
-  .div1 {
-    width: 200px;
-    height: 200px;
-    background-color: red;
+  .select-tag-button {
+    width: 7rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
   }
-  .div2 {
-    width: 200px;
-    height: 200px;
-    background-color: yellow;
+  .btnActive {
+    background-color: aqua;
   }
 </style>

@@ -1,9 +1,11 @@
 <template>
   <div class="userPanel">
-    <label for="timeLeft">Time Left:</label>
-    <input
-      type="text"
-      v-model="quarterInfo.quarterTime" />
+    <div class="timeLeft">
+      <label for="timeLeft">Time Left:</label>
+      <input
+        type="text"
+        v-model="quarterInfo.quarterTime" />
+    </div>
     <div class="select">
         <span>Quarter</span>
         <select v-model="quarterInfo.selected">
@@ -35,5 +37,12 @@ export default {
     border-radius: 1rem;
     margin-bottom: 10px;
     box-sizing: border-box;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .timeLeft, .select {
+    font-size: 1.5rem;
+    font-weight: bold;
   }
 </style>

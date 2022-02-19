@@ -55,8 +55,8 @@ export default {
     width: 100%;
     height: 20rem;
     border: 5px solid blue;
-    box-sizing: border-box;
     border-radius: 1rem;
+    box-sizing: border-box;
   }
   .matchUp {
     height: 15rem;
@@ -84,12 +84,13 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin: 0 1rem;
   }
   .teamName {
     height: 50%;
     font-size: 2rem;
+    font-weight: bold;
   }
   .teamScore {
     font-weight: bold;
