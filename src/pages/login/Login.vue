@@ -17,7 +17,18 @@
 
 <script>
 export default {
-
+  name: 'Login',
+  data () {
+    return {
+      userName: '',
+      password: ''
+    }
+  },
+  methods: {
+    handleLoginBtn () {
+      //
+    }
+  }
 }
 </script>
 

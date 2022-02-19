@@ -34,5 +34,6 @@ export default {
     border: 5px solid yellow;
     border-radius: 1rem;
     margin-bottom: 10px;
+    box-sizing: border-box;
   }
 </style>

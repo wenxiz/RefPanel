@@ -55,6 +55,7 @@ export default {
     width: 100%;
     height: 20rem;
     border: 5px solid blue;
+    box-sizing: border-box;
     border-radius: 1rem;
   }
   .matchUp {

@@ -107,6 +107,7 @@ export default {
     display: flex;
     justify-content: space-around;
     margin-bottom: 10px;
+    box-sizing: border-box;
   }
   .addPts, .control {
     height: 100%;
