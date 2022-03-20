@@ -44,8 +44,8 @@ export default {
       btnIndex: 0,
       quarterInfo: {
         quarter: [1, 2, 3, 4],
-        selected: '1',
-        quarterTime: 0
+        selected: 1,
+        quarterTime: 720
       },
       homeTeam: {
         name: 'Miami Heat',
