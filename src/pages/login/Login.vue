@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'Login',
   data () {
@@ -151,14 +153,18 @@ export default {
       // check input
       if (this.homeTeamName && this.awayTeamName) {
         // there's no async actions, so use 'commit' instead
-        this.$store.commit('changeHomeTeam', homeTeam)
-        this.$store.commit('changeAwayTeam', awayTeam)
+        // this.$store.commit('changeHomeTeam', homeTeam)
+        // this.$store.commit('changeAwayTeam', awayTeam)
+        this.changeHomeTeam(homeTeam)
+        this.changeAwayTeam(awayTeam)
 
         this.$router.push('/home')
       } else {
         alert('Please enter Teams or select logos!')
       }
     },
+    // optimize 'this.$store.commit' with mapMutations
+    ...mapMutations(['changeHomeTeam', 'changeAwayTeam']),
     handleIconClick () {
       document.addEventListener('click', (e) => {
         e.stopPropagation()

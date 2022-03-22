@@ -2,18 +2,18 @@
   <div class="showScore">
     <div class="matchUp">
       <div class="team">
-        <img :src="this.$store.state.homeTeam.logoUrl" alt="homeLogo" class="teamLogo">
+        <img :src="this.homeTeam.logoUrl" alt="homeLogo" class="teamLogo">
         <div class="teamWrapper">
-          <h3 class="teamName">{{ this.$store.state.homeTeam.name }}</h3>
-          <div class="teamScore">{{ this.$store.state.homeTeam.score }}</div>
+          <h3 class="teamName">{{ this.homeTeam.name }}</h3>
+          <div class="teamScore">{{ this.homeTeam.score }}</div>
         </div>
       </div>
       <div class="colon">:</div>
       <div class="team away">
-        <img class="teamLogo" :src="this.$store.state.awayTeam.logoUrl" alt="awayLogo">
+        <img class="teamLogo" :src="this.awayTeam.logoUrl" alt="awayLogo">
         <div class="teamWrapper">
-          <h3 class="teamName">{{ this.$store.state.awayTeam.name }}</h3>
-          <div class="teamScore">{{ this.$store.state.awayTeam.score }}</div>
+          <h3 class="teamName">{{ this.awayTeam.name }}</h3>
+          <div class="teamScore">{{ this.awayTeam.score }}</div>
         </div>
       </div>
     </div>
@@ -26,14 +26,13 @@
 
 <script>
 import { myMixin } from '@/pages/mixins.js'
+import { mapState } from 'vuex'
 
 export default {
   name: 'ShowScore',
   mixins: [myMixin],
   props: {
     quarterInfo: Object
-    // homeTeam: Object,
-    // awayTeam: Object
   },
   filters: {
     quarterTimeFilter (time) {
@@ -46,6 +45,9 @@ export default {
         return time
       }
     }
+  },
+  computed: {
+    ...mapState(['homeTeam', 'awayTeam'])
   }
 }
 </script>
