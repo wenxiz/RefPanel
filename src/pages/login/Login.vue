@@ -4,12 +4,10 @@
     <input type="text" id="homeTeam" v-model="homeTeamName" />
     <label for="awayTeam">Away Team:</label>
     <input type="text" id="awayTeam" v-model="awayTeamName" />
-    <router-link to="/home">
-      <input
+    <input
         type="button"
         value="Start Game!"
-        @click="handleLoginBtn" />
-    </router-link>
+        @click="handleLoginBtn(homeTeamName, awayTeamName)" />
     <div class="swiper">
       <swiper :options="swiperOption">
       <swiper-slide
@@ -27,9 +25,19 @@
       </swiper-slide>
     </swiper>
     </div>
-    <div class="showHomeLogo">
-      <img class="icon-img-content" :src="homeTeamLogo" />
+    <div class="showTeams">
+      <div class="showHomeTeam">{{homeTeamName}}
+        <div class="showHomeLogo">
+          <img class="icon-img-content" :src="homeTeamLogo" />
+        </div>
+      </div>VS
+      <div class="showHomeTeam">{{awayTeamName}}
+        <div class="showHomeLogo">
+          <img class="icon-img-content" :src="homeTeamLogo" />
+        </div>
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -136,9 +144,20 @@ export default {
     }
   },
   methods: {
-    handleLoginBtn () {
-      //
-      console.log(this.homeTeamName, this.awayTeamName)
+    handleLoginBtn (homeTeam, awayTeam) {
+      // this.$store.dispatch('changeHomeTeam', hometeam)
+      // this.$store.dispatch('changeAwayTeam', awayTeam)
+
+      // check input
+      if (this.homeTeamName && this.awayTeamName) {
+        // there's no async actions, so use 'commit' instead
+        this.$store.commit('changeHomeTeam', homeTeam)
+        this.$store.commit('changeAwayTeam', awayTeam)
+
+        this.$router.push('/home')
+      } else {
+        alert('Please enter Teams or select logos!')
+      }
     },
     handleIconClick () {
       document.addEventListener('click', (e) => {
