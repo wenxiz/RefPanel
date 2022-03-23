@@ -1,6 +1,6 @@
 // 拆分index.js 便于维护
 let defaultHomeTeam = 'Qilihe Clippers'
-let defaultAwayTeam = 'Anning Hangke'
+let defaultAwayTeam = 'Anning Hangkes'
 try {
   if (localStorage.homeTeamName) {
     defaultHomeTeam = localStorage.homeTeamName
