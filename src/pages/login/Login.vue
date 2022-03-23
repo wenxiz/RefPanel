@@ -4,12 +4,10 @@
     <input type="text" id="homeTeam" v-model="homeTeamName" />
     <label for="awayTeam">Away Team:</label>
     <input type="text" id="awayTeam" v-model="awayTeamName" />
-    <router-link to="/home">
-      <input
+    <input
         type="button"
         value="Start Game!"
-        @click="handleLoginBtn" />
-    </router-link>
+        @click="handleLoginBtn(homeTeamName, awayTeamName)" />
     <div class="swiper">
       <swiper :options="swiperOption">
       <swiper-slide
@@ -34,6 +32,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'Login',
   data () {
@@ -136,9 +136,11 @@ export default {
     }
   },
   methods: {
-    handleLoginBtn () {
-      //
-      console.log(this.homeTeamName, this.awayTeamName)
+    handleLoginBtn (homeTeam, awayTeam) {
+      this.changeHomeTeam(homeTeam)
+      this.changeAwayTeam(awayTeam)
+
+      this.$router.push('/home')
     },
     handleIconClick () {
       document.addEventListener('click', (e) => {
@@ -149,7 +151,8 @@ export default {
           this.homeTeamLogo = target.src
         }
       })
-    }
+    },
+    ...mapMutations(['changeHomeTeam', 'changeAwayTeam'])
   },
   computed: {
     pages () {
