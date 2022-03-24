@@ -1,9 +1,15 @@
 <template>
   <div class="panel">
     <div class="addPts">
-      <button @click="handlePtsClick(homeTeam, 1)">+1</button>
-      <button @click="handlePtsClick(homeTeam, 2)">+2</button>
-      <button @click="handlePtsClick(homeTeam, 3)">+3</button>
+      <button
+        @click="handlePtsClick(homeTeam, 1)"
+        :disabled='pause'>+1</button>
+      <button
+        @click="handlePtsClick(homeTeam, 2)"
+        :disabled='pause'>+2</button>
+      <button
+        @click="handlePtsClick(homeTeam, 3)"
+        :disabled='pause'>+3</button>
     </div>
     <div class="control">
       <button
@@ -29,9 +35,15 @@
       >Undo</button>
     </div>
     <div class="addPts">
-      <button @click="handlePtsClick(awayTeam, 1)">+1</button>
-      <button @click="handlePtsClick(awayTeam, 2)">+2</button>
-      <button @click="handlePtsClick(awayTeam, 3)">+3</button>
+      <button
+        @click="handlePtsClick(awayTeam, 1)"
+        :disabled='pause'>+1</button>
+      <button
+        @click="handlePtsClick(awayTeam, 2)"
+        :disabled='pause'>+2</button>
+      <button
+        @click="handlePtsClick(awayTeam, 3)"
+        :disabled='pause'>+3</button>
     </div>
     {{this.quarterInfo.quarterTime}}
   </div>
@@ -76,10 +88,13 @@ export default {
       }
     },
     handlePtsClick (team, pts) {
-      // record each action
-      this.action.push({team, pts})
-      team.score += pts
-      console.log(this.action)
+      // useful when click 'Start Button'
+      if (this.disabled === true) {
+        // record each action
+        this.action.push({team, pts})
+        team.score += pts
+        console.log(this.action)
+      }
     },
     handleUndoClick () {
       if (this.action.length !== 0) {
