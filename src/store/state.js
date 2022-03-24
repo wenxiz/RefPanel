@@ -23,13 +23,13 @@ export default {
   homeTeam: {
     id: 1,
     name: defaultHomeTeam,
-    score: 10,
+    score: 0,
     logoUrl: defaultHomeLogo
   },
   awayTeam: {
     id: 1,
     name: defaultAwayTeam,
-    score: 20,
+    score: 0,
     logoUrl: defaultAwayLogo
   }
 }
