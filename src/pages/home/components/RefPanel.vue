@@ -39,6 +39,7 @@
 
 <script>
 import { myMixin } from '@/pages/mixins.js'
+// import { mapMutations, mapState } from 'vuex'
 
 export default {
   name: 'RefPanel',
@@ -81,7 +82,9 @@ export default {
       this.action.push({team, pts})
       team.score += pts
       console.log(this.action)
+      // this.changeScore(team, pts)
     },
+    // ...mapMutations(['changeScore']),
     handleUndoClick () {
       if (this.action.length !== 0) {
         // undo scores
@@ -94,6 +97,9 @@ export default {
       }
     }
   }
+  // computed: {
+  //   ...mapState(['homeTeam', 'awayTeam'])
+  // }
 }
 </script>
 

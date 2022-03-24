@@ -1,14 +1,17 @@
 <template>
   <div class="home">
     <label for="homeTeam">Home Team:</label>
-    <input type="text" id="homeTeam" v-model="homeTeamName" />
+    <input type="text" id="homeTeam" v-model="homeTeam.name" />
     <label for="awayTeam">Away Team:</label>
-    <input type="text" id="awayTeam" v-model="awayTeamName" />
+    <input type="text" id="awayTeam" v-model="awayTeam.name" />
     <input
         type="button"
         value="Start Game!"
-        @click="handleLoginBtn(homeTeamName, awayTeamName)" />
-    <div class="swiper">
+        @click="handleLoginBtn(homeTeam, awayTeam)" />
+    <div
+        class="swiper"
+        :class="isDisabled?'click-disable':''"
+        @click="handleIconClick">
       <swiper :options="swiperOption">
       <swiper-slide
         v-for="(page, index) of pages"
@@ -18,7 +21,7 @@
             v-for="item of page"
             :key="item.id"
             >
-              <div class="icon-img" @click="handleIconClick">
+              <div class="icon-img">
                   <img class="icon-img-content" :src="item.imgUrl" />
               </div>
           </div>
@@ -26,14 +29,14 @@
     </swiper>
     </div>
     <div class="showTeams">
-      <div class="showHomeTeam">{{homeTeamName}}
+      <div class="showHomeTeam">{{homeTeam.name}}
         <div class="showHomeLogo">
-          <img class="icon-img-content" :src="homeTeamLogo" />
+          <img class="icon-img-content" :src="homeTeam.logoUrl" />
         </div>
       </div>VS
-      <div class="showHomeTeam">{{awayTeamName}}
+      <div class="showHomeTeam">{{awayTeam.name}}
         <div class="showHomeLogo">
-          <img class="icon-img-content" :src="homeTeamLogo" />
+          <img class="icon-img-content" :src="awayTeam.logoUrl" />
         </div>
       </div>
     </div>
@@ -48,9 +51,16 @@ export default {
   name: 'Login',
   data () {
     return {
-      homeTeamName: '',
-      awayTeamName: '',
-      homeTeamLogo: '',
+      homeTeam: {
+        name: '',
+        logoUrl: ''
+      },
+      awayTeam: {
+        name: '',
+        logoUrl: ''
+      },
+      selected: false,
+      isDisabled: false,
       swiperOption: {
         pagination: '.swiper-pagination',
         loop: true
@@ -151,7 +161,7 @@ export default {
       // this.$store.dispatch('changeAwayTeam', awayTeam)
 
       // check input
-      if (this.homeTeamName && this.awayTeamName) {
+      if (this.homeTeam.name && this.awayTeam.name) {
         // there's no async actions, so use 'commit' instead
         // this.$store.commit('changeHomeTeam', homeTeam)
         // this.$store.commit('changeAwayTeam', awayTeam)
@@ -165,15 +175,23 @@ export default {
     },
     // optimize 'this.$store.commit' with mapMutations
     ...mapMutations(['changeHomeTeam', 'changeAwayTeam']),
-    handleIconClick () {
-      document.addEventListener('click', (e) => {
-        e.stopPropagation()
-        e.preventDefault()
-        const target = e.target
-        if (target.nodeName === 'IMG') {
-          this.homeTeamLogo = target.src
+    handleIconClick (e) {
+      e.stopPropagation()
+      e.preventDefault()
+      const target = e.target
+      if (target.nodeName === 'IMG') {
+        if (!this.selected) {
+          if (confirm('Do you want this one for HomeTeam?')) {
+            this.homeTeam.logoUrl = target.src
+            this.selected = true
+          }
+        } else {
+          if (confirm('Do you want this one for AwayTeam?')) {
+            this.awayTeam.logoUrl = target.src
+            this.isDisabled = true
+          }
         }
-      })
+      }
     }
   },
   computed: {
@@ -216,4 +234,6 @@ export default {
           display: block
           margin: 0 auto
           height: 100%
+  .click-disable
+        pointer-events: none;
 </style>

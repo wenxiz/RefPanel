@@ -1,14 +1,23 @@
 export default {
   changeHomeTeam (state, homeTeam) {
-    state.homeTeam.name = homeTeam
+    const {name, logoUrl} = homeTeam
+    state.homeTeam.name = name
+    state.homeTeam.logoUrl = logoUrl
     try {
-      localStorage.homeTeamName = homeTeam
+      localStorage.homeTeamName = name
+      localStorage.homeTeamLogo = logoUrl
     } catch (e) {}
   },
   changeAwayTeam (state, awayTeam) {
-    state.awayTeam.name = awayTeam
+    const {name, logoUrl} = awayTeam
+    state.awayTeam.name = name
+    state.awayTeam.logoUrl = logoUrl
     try {
-      localStorage.awayTeamName = awayTeam
+      localStorage.awayTeamName = name
+      localStorage.awayTeamLogo = logoUrl
     } catch (e) {}
+  },
+  changeScore (state, team, pts) {
+    console.log('team', team, 'pts', pts)
   }
 }
