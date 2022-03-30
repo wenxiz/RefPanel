@@ -1,13 +1,10 @@
 <template>
   <div class="home">
     <label for="homeTeam">Home Team:</label>
-    <input type="text" id="homeTeam" v-model="homeTeam.name" />
+    <input type="text" id="homeTeam" class="team-info" v-model="homeTeam.name" />
     <label for="awayTeam">Away Team:</label>
-    <input type="text" id="awayTeam" v-model="awayTeam.name" />
-    <input
-        type="button"
-        value="Start Game!"
-        @click="handleLoginBtn(homeTeam, awayTeam)" />
+    <input type="text" id="awayTeam" class="team-info" v-model="awayTeam.name" />
+    <div class="team-info">Select Team Logos:</div>
     <div
         class="swiper"
         :class="isDisabled?'click-disable':''"
@@ -28,19 +25,25 @@
       </swiper-slide>
     </swiper>
     </div>
-    <div class="showTeams">
-      <div class="showHomeTeam">{{homeTeam.name}}
-        <div class="showHomeLogo">
-          <img class="icon-img-content" :src="homeTeam.logoUrl" />
+    <div class="show-teams">
+      <div class="show-team">
+        <div class="show-team-name">{{homeTeam.name}}</div>
+        <div class="show-tome-logo">
+          <img class="show-tome-logo-img" :src="homeTeam.logoUrl" />
         </div>
-      </div>VS
-      <div class="showHomeTeam">{{awayTeam.name}}
-        <div class="showHomeLogo">
-          <img class="icon-img-content" :src="awayTeam.logoUrl" />
+      </div>
+      <h1>VS</h1>
+      <div class="show-team">
+        <h1 class="show-team-name">{{awayTeam.name}}</h1>
+        <div class="show-tome-logo">
+          <img class="show-tome-logo-img" :src="awayTeam.logoUrl" />
         </div>
       </div>
     </div>
-
+    <input
+        type="button"
+        value="Start Game!"
+        @click="handleLoginBtn(homeTeam, awayTeam)" />
   </div>
 </template>
 
@@ -211,6 +214,34 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  .home
+    display: flex
+    flex-direction: column
+    align-items: center
+    .team-info
+      width: 50%
+      margin: 1rem
+    .show-teams
+      width: 20rem
+      margin: 1rem
+      display: flex
+      justify-content: space-around
+      align-items: center
+      .show-team
+        width: 6rem
+        height: 6rem
+        .show-team-name
+          width: 100%
+          height: 1.5rem
+          font-weight: bold
+          font-size: 1.5rem
+          margin-bottom: 0.5rem
+        .show-tome-logo
+          width: 100%
+          height: 80%
+          .show-tome-logo-img
+            height: 100%
+            display: block
   .swiper
     width: 50%;
     border: 1px solid black;
