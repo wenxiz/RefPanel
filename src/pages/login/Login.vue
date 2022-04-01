@@ -155,6 +155,9 @@ export default {
       }, {
         id: 29,
         imgUrl: 'static/image/29_pacers.png'
+      }, {
+        id: 30,
+        imgUrl: 'static/image/30_knicks.png'
       }]
     }
   },

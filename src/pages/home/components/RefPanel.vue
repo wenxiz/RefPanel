@@ -3,18 +3,19 @@
     <div class="addPts">
       <button
         @click="handlePtsClick(homeTeam, 1)"
-        :disabled='pause'>+1</button>
+        >+1</button>
       <button
         @click="handlePtsClick(homeTeam, 2)"
-        :disabled='pause'>+2</button>
+        >+2</button>
       <button
         @click="handlePtsClick(homeTeam, 3)"
-        :disabled='pause'>+3</button>
+        >+3</button>
     </div>
     <div class="control">
       <button
         id="pause"
         @click="handlePauseClick"
+        :disabled="pause_disabled"
       >Pause</button>
       <div class="select">
         <span>Quarter</span>
@@ -27,7 +28,7 @@
       </div>
       <button id="start"
         @click="handleStartClick"
-        :disabled='disabled'
+        :disabled='start_disabled'
       ><span class="iconfont select iconPlay">&#xe68a;</span>Start</button>
       <button
         id="undo"
@@ -37,13 +38,13 @@
     <div class="addPts">
       <button
         @click="handlePtsClick(awayTeam, 1)"
-        :disabled='pause'>+1</button>
+        >+1</button>
       <button
         @click="handlePtsClick(awayTeam, 2)"
-        :disabled='pause'>+2</button>
+        >+2</button>
       <button
         @click="handlePtsClick(awayTeam, 3)"
-        :disabled='pause'>+3</button>
+        >+3</button>
     </div>
     {{this.quarterInfo.quarterTime}}
   </div>
@@ -61,21 +62,23 @@ export default {
   mixins: [myMixin],
   data () {
     return {
-      disabled: false,
+      start_disabled: false,
       pause: false,
+      pause_disabled: true,
       timer: 0
     }
   },
   methods: {
     handleStartClick () {
-      this.disabled = true
+      this.start_disabled = true
+      this.pause_disabled = false
       // counter
       this.timer = setInterval(this.run_timer, 100)
     },
     handlePauseClick () {
       const pauseBtn = document.querySelector('#pause')
 
-      if (this.disabled === true) {
+      if (this.start_disabled === true) {
         if (!this.pause) {
           this.pause = true
           pauseBtn.innerHTML = 'Resume'
@@ -89,7 +92,7 @@ export default {
     },
     handlePtsClick (team, pts) {
       // useful when click 'Start Button'
-      if (this.disabled === true) {
+      if (this.start_disabled === true) {
         // record each action
         this.action.push({team, pts})
         team.score += pts

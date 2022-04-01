@@ -14,7 +14,8 @@ export const myMixin = {
     run_timer () {
       if (this.quarterInfo.quarterTime <= 0) {
         clearInterval(this.timer)
-        this.disabled = false
+        this.start_disabled = false
+        this.pause_disabled = true
         this.quarterInfo.quarterTime = 10
         this.quarterInfo.selected > 4 ? alert('Game is finished!') : this.quarterInfo.selected++
       } else {
