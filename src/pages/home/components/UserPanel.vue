@@ -1,20 +1,6 @@
 <template>
   <div class="userPanel">
-    <div class="timeLeft">
-      <label for="timeLeft">Time Left:</label>
-      <input
-        type="text"
-        v-model="quarterInfo.quarterTime" />
-    </div>
-    <div class="select">
-        <span>Quarter</span>
-        <select v-model="quarterInfo.selected">
-          <option disabled value="">Select</option>
-          <option
-            v-for="item in quarterInfo.quarter"
-            :key="item.index">{{ item }}</option>
-        </select>
-      </div>
+    sth later...
   </div>
 </template>
 
@@ -40,9 +26,5 @@ export default {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-  }
-  .timeLeft, .select {
-    font-size: 1.5rem;
-    font-weight: bold;
   }
 </style>

@@ -12,11 +12,12 @@
         >+3</button>
     </div>
     <div class="control">
-      <button
-        id="pause"
-        @click="handlePauseClick"
-        :disabled="pause_disabled"
-      >Pause</button>
+      <div class="timeLeft">
+        <label for="timeLeft">Time Left:</label>
+        <input
+          type="text"
+          v-model="quarterInfo.quarterTime" />
+    </div>
       <div class="select">
         <span>Quarter</span>
         <select v-model="quarterInfo.selected">
@@ -26,6 +27,11 @@
             :key="item.index">{{ item }}</option>
         </select>
       </div>
+      <button
+        id="pause"
+        @click="handlePauseClick"
+        :disabled="pause_disabled"
+      >Pause</button>
       <button id="start"
         @click="handleStartClick"
         :disabled='start_disabled'
@@ -46,7 +52,6 @@
         @click="handlePtsClick(awayTeam, 3)"
         >+3</button>
     </div>
-    {{this.quarterInfo.quarterTime}}
   </div>
 </template>
 
@@ -140,7 +145,7 @@ export default {
     height: 3rem;
     font-size: 1.5rem;
   }
-  .select {
+  .timeLeft, .select {
     font-size: 1.5rem;
     font-weight: bold;
   }
