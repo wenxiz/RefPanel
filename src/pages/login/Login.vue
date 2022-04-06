@@ -1,50 +1,61 @@
 <template>
-  <div class="home">
-    <label for="homeTeam">Home Team:</label>
-    <input type="text" id="homeTeam" class="team-info" v-model="homeTeam.name" />
-    <label for="awayTeam">Away Team:</label>
-    <input type="text" id="awayTeam" class="team-info" v-model="awayTeam.name" />
-    <div class="team-info">Select Team Logos:</div>
-    <div
-        class="swiper"
-        :class="isDisabled?'click-disable':''"
-        @click="handleIconClick">
-      <swiper :options="swiperOption">
-      <swiper-slide
-        v-for="(page, index) of pages"
-        :key="index">
-          <div
-            class="icon"
-            v-for="item of page"
-            :key="item.id"
-            >
-              <div class="icon-img">
-                  <img class="icon-img-content" :src="item.imgUrl" />
+  <el-row :gutter="10">
+    <el-col :xs="24" :sm="24" :md="24" :lg="24">
+      <el-container>
+        <el-main>
+          <el-form label-width="8rem">
+            <el-form-item label="Home Team:">
+              <el-input v-model="homeTeam.name"></el-input>
+            </el-form-item>
+            <el-form-item label="Away Team:">
+              <el-input v-model="awayTeam.name"></el-input>
+            </el-form-item>
+            <label for="swiperIcon" class="team-font">Select Team Logo:</label>
+            <div
+                id="swiperIcon"
+                class="swiper"
+                :class="isDisabled?'click-disable':''"
+                @click="handleIconClick">
+                <swiper :options="swiperOption">
+                  <swiper-slide
+                    v-for="(page, index) of pages"
+                    :key="index">
+                      <div
+                        class="icon"
+                        v-for="item of page"
+                        :key="item.id"
+                        >
+                          <div class="icon-img">
+                              <img class="icon-img-content" :src="item.imgUrl" />
+                          </div>
+                      </div>
+                  </swiper-slide>
+                </swiper>
               </div>
-          </div>
-      </swiper-slide>
-    </swiper>
-    </div>
-    <div class="show-teams">
-      <div class="show-team">
-        <div class="show-team-name">{{homeTeam.name}}</div>
-        <div class="show-tome-logo">
-          <img class="show-tome-logo-img" :src="homeTeam.logoUrl" />
-        </div>
-      </div>
-      <h1>VS</h1>
-      <div class="show-team">
-        <h1 class="show-team-name">{{awayTeam.name}}</h1>
-        <div class="show-tome-logo">
-          <img class="show-tome-logo-img" :src="awayTeam.logoUrl" />
-        </div>
-      </div>
-    </div>
-    <input
-        type="button"
-        value="Start Game!"
-        @click="handleLoginBtn(homeTeam, awayTeam)" />
-  </div>
+              <div class="show-teams">
+                <div class="show-team">
+                  <div class="show-team-name">{{homeTeam.name}}</div>
+                  <div class="show-team-logo">
+                    <img class="show-team-logo-img" :src="homeTeam.logoUrl" />
+                  </div>
+                </div>
+                <h1 class="team-font">VS</h1>
+                <div class="show-team">
+                  <h1 class="show-team-name">{{awayTeam.name}}</h1>
+                  <div class="show-team-logo">
+                    <img class="show-team-logo-img" :src="awayTeam.logoUrl" />
+                  </div>
+                </div>
+              </div>
+              <el-button
+                type="primary"
+                @click="handleLoginBtn(homeTeam, awayTeam)"
+                >Start Game!</el-button>
+          </el-form>
+        </el-main>
+      </el-container>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -66,7 +77,9 @@ export default {
       isDisabled: false,
       swiperOption: {
         pagination: '.swiper-pagination',
-        loop: true
+        loop: true,
+        observer: true,
+        observeParents: true
       },
       logoList: [{
         id: 1,
@@ -217,38 +230,24 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .home
-    display: flex
-    flex-direction: column
-    align-items: center
-    .team-info
-      width: 50%
-      margin: 1rem
-    .show-teams
-      width: 20rem
-      margin: 1rem
-      display: flex
-      justify-content: space-around
-      align-items: center
-      .show-team
-        width: 6rem
-        height: 6rem
-        .show-team-name
-          width: 100%
-          height: 1.5rem
-          font-weight: bold
-          font-size: 1.5rem
-          margin-bottom: 0.5rem
-        .show-tome-logo
-          width: 100%
-          height: 80%
-          .show-tome-logo-img
-            height: 100%
-            display: block
+  .el-form >>> .el-form-item__label
+    text-align: center
+    padding: 0
+    font-size: 1.2rem
+  .el-main
+    background-color: #E9EEF3
+    color: #333
+    text-align: center
+    line-height: 83px
+    .team-font
+      color: #606266
+      font-size: 1.2rem
   .swiper
-    width: 50%;
-    border: 1px solid black;
-    margin: 0 auto;
+    width: 75%;
+    border: 2px solid gray
+    margin: 0 auto
+    padding: 1rem
+    border-radius: 10px
     .icon
       overflow: hidden
       float: left
@@ -268,6 +267,28 @@ export default {
           display: block
           margin: 0 auto
           height: 100%
+  .show-teams
+      margin: 1rem
+      display: flex
+      justify-content: space-around
+      align-items: center
+      .show-team
+        width: 6rem
+        height: 11rem
+        .show-team-name
+          width: 100%
+          height: 3.5rem
+          line-height: 1.5rem
+          font-weight: bold
+          font-size: 1.5rem
+          margin-bottom: 0.5rem
+          color: #606266
+        .show-team-logo
+          width: 100%
+          height: 100%
+          .show-team-logo-img
+            height: 5rem
+            display: block
   .click-disable
         pointer-events: none;
 </style>

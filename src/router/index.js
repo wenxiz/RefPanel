@@ -7,8 +7,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      // redirect: '/login'
-      redirect: '/home'
+      redirect: '/login'
+      // redirect: '/home'
     }, {
       path: '/login',
       name: 'Login',
