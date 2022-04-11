@@ -1,58 +1,66 @@
 <template>
-  <div class="panel">
-    <div class="addPts">
-      <button
-        @click="handlePtsClick(homeTeam, 1)"
-        >+1</button>
-      <button
-        @click="handlePtsClick(homeTeam, 2)"
-        >+2</button>
-      <button
-        @click="handlePtsClick(homeTeam, 3)"
-        >+3</button>
-    </div>
-    <div class="control">
-      <div class="timeLeft">
-        <label for="timeLeft">Time Left:</label>
-        <input
-          type="text"
-          v-model="quarterInfo.quarterTime" />
-    </div>
-      <div class="select">
-        <span>Quarter</span>
-        <select v-model="quarterInfo.selected">
-          <option disabled value="">Select</option>
-          <option
-            v-for="item in quarterInfo.quarter"
-            :key="item.index">{{ item }}</option>
-        </select>
-      </div>
-      <button
-        id="pause"
-        @click="handlePauseClick"
-        :disabled="pause_disabled"
-      >Pause</button>
-      <button id="start"
-        @click="handleStartClick"
-        :disabled='start_disabled'
-      ><span class="iconfont select iconPlay">&#xe68a;</span>Start</button>
-      <button
-        id="undo"
-        @click="handleUndoClick"
-      >Undo</button>
-    </div>
-    <div class="addPts">
-      <button
-        @click="handlePtsClick(awayTeam, 1)"
-        >+1</button>
-      <button
-        @click="handlePtsClick(awayTeam, 2)"
-        >+2</button>
-      <button
-        @click="handlePtsClick(awayTeam, 3)"
-        >+3</button>
-    </div>
-  </div>
+  <el-row>
+    <el-col :xs="6">
+      <el-button
+        type="info"
+        circle
+        @click="handlePtsClick(homeTeam, 1)">+1</el-button>
+      <el-button
+        type="info"
+        circle
+        @click="handlePtsClick(homeTeam, 2)">+2</el-button>
+      <el-button
+        type="info"
+        circle
+        @click="handlePtsClick(homeTeam, 3)">+3</el-button>
+    </el-col>
+    <el-col :xs="12">
+      <el-form>
+        <el-form-item label="Time Left:">
+          <el-input
+            v-model="quarterInfo.quarterTime"
+            style="width: 50%"></el-input>
+        </el-form-item>
+        <el-form-item label="Quarter:">
+          <el-select v-model="quarterInfo.selected" style="width: 50%">
+            <el-option
+              v-for="item in quarterInfo.quarter"
+              :key="item.index"
+              :value="item"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+        <el-button
+            id="start"
+            @click="handleStartClick"
+            :disabled="start_disabled"
+            type="success"><span class="iconfont select iconPlay">&#xe68a;</span>Start</el-button>
+        <el-button
+            id="pause"
+            @click="handlePauseClick"
+            :disabled="pause_disabled"
+            type="success">Pause</el-button>
+        <el-button
+            id="undo"
+            @click="handleUndoClick"
+            type="warning">Undo</el-button>
+      </el-form>
+    </el-col>
+    <el-col :xs="6">
+      <el-button
+        type="info"
+        circle
+        @click="handlePtsClick(awayTeam, 1)">+1</el-button>
+        <el-button
+        type="info"
+        circle
+        @click="handlePtsClick(awayTeam, 2)">+2</el-button>
+        <el-button
+        type="info"
+        circle
+        @click="handlePtsClick(awayTeam, 3)">+3</el-button>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -74,6 +82,9 @@ export default {
     }
   },
   methods: {
+    handleBusClick () {
+      this.bus.$emit('change', this.pause)
+    },
     handleStartClick () {
       this.start_disabled = true
       this.pause_disabled = false
@@ -122,35 +133,16 @@ export default {
 }
 </script>
 
-<style scoped>
-  .panel {
-    width: 100%;
-    height: 15rem;
-    border: 5px solid red;
-    border-radius: 1rem;
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-  }
-  .addPts, .control {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-  }
-  button {
-    width: 7rem;
-    height: 3rem;
-    font-size: 1.5rem;
-  }
-  .timeLeft, .select {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  .iconPlay {
-    margin-left: -.5rem;
-    margin-right: 1.2rem;
-  }
+<style lang="stylus" scoped>
+  .el-form-item
+    height: 3rem
+    margin-bottom: 5px
+  .el-button
+    margin-left: 0
+    margin-bottom: 3rem
+    display: block
+    margin: 15px auto
+    .iconPlay
+      margin-left: -.5rem
+      margin-right: 1.2rem
 </style>

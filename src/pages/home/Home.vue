@@ -1,26 +1,24 @@
 <template>
-  <div class="home">
-    <ul class="select-tag">
-      <li
-        v-for="(item, index) in buttonNames"
-        :key="index"
-        @click="handleBtnClick(index)">
-        <button class="select-tag-button" :class="btnIndex === index ? 'btnActive' : ''">{{ item }}</button>
-      </li>
-    </ul>
-    <user-panel
-      v-show="btnIndex === 0"
-      :quarterInfo="quarterInfo" />
-    <ref-panel
-      v-show="btnIndex === 1"
-      :quarterInfo="quarterInfo"
-      :homeTeam="homeTeam"
-      :awayTeam="awayTeam" />
-    <show-score
-      :quarterInfo="quarterInfo"
-      :homeTeam="homeTeam"
-      :awayTeam="awayTeam" />
-  </div>
+  <el-row :gutter="10">
+    <el-col :xs="24" :sm="24" :md="24" :lg="24">
+      <el-tabs v-model="activeName">
+        <show-score
+        :quarterInfo="quarterInfo"
+        :homeTeam="homeTeam"
+        :awayTeam="awayTeam" />
+        <el-tab-pane label="User" name="User" >
+          <user-panel
+            :quarterInfo="quarterInfo" />
+        </el-tab-pane>
+        <el-tab-pane label="Ref" name="Ref" >
+          <ref-panel
+            :quarterInfo="quarterInfo"
+            :homeTeam="homeTeam"
+            :awayTeam="awayTeam" />
+        </el-tab-pane>
+      </el-tabs>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -56,7 +54,8 @@ export default {
         name: 'Los Angeles Lakers',
         score: 0,
         logoUrl: 'https://img0.baidu.com/it/u=1966218152,3607118776&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=300'
-      }
+      },
+      activeName: 'Ref'
     }
   },
   methods: {
@@ -68,18 +67,4 @@ export default {
 </script>
 
 <style>
-  .select-tag {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-  }
-  .select-tag-button {
-    width: 7rem;
-    height: 3rem;
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  .btnActive {
-    background-color: aqua;
-  }
 </style>

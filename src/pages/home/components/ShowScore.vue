@@ -1,26 +1,44 @@
 <template>
-  <div class="showScore">
-    <div class="matchUp">
-      <div class="team">
-        <img :src="this.homeTeam.logoUrl" alt="homeLogo" class="teamLogo">
-        <div class="teamWrapper">
-          <h3 class="teamName">{{ this.homeTeam.name }}</h3>
-          <div class="teamScore">{{ this.homeTeam.score }}</div>
+  <div>
+    <el-row :gutter="20">
+      <el-col :xs="8">
+        <el-image
+          :src="this.homeTeam.logoUrl"
+        ></el-image>
+        <h3 class="teamName">{{ this.homeTeam.name }}</h3>
+      </el-col>
+      <el-col :xs="8">
+        <div>
+          <div>Game#:</div>
+          <div>1Q3KJS</div>
         </div>
-      </div>
-      <div class="colon">:</div>
-      <div class="team away">
-        <img class="teamLogo" :src="this.awayTeam.logoUrl" alt="awayLogo">
-        <div class="teamWrapper">
-          <h3 class="teamName">{{ this.awayTeam.name }}</h3>
-          <div class="teamScore">{{ this.awayTeam.score }}</div>
-        </div>
-      </div>
-    </div>
-    <div class="quarter">
-      <div class="quaterNum">Quarter {{ quarterInfo.selected }}</div>
-      <div class="timer"> {{ quarterInfo.quarterTime | quarterTimeFilter }} </div>
-    </div>
+      </el-col>
+      <el-col :xs="8">
+        <el-image
+          :src="this.awayTeam.logoUrl"
+        ></el-image>
+        <h3 class="teamName">{{ this.awayTeam.name }}</h3>
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col :xs="8">
+        <div class="teamScore">{{ this.homeTeam.score }}</div>
+      </el-col>
+      <el-col :xs="8">
+        <div class="colon">:</div>
+      </el-col>
+      <el-col :xs="8">
+        <div class="teamScore">{{ this.awayTeam.score }}</div>
+      </el-col>
+    </el-row>
+    <el-row :gutter="10">
+      <el-col :xs="14">
+        <div class="quaterNum">Quarter {{ quarterInfo.selected }}</div>
+      </el-col>
+      <el-col :xs="10">
+        <div class="timer"> {{ quarterInfo.quarterTime | quarterTimeFilter }} </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -52,66 +70,27 @@ export default {
 }
 </script>
 
-<style scoped>
-  .showScore {
-    width: 100%;
-    height: 20rem;
-    border: 5px solid blue;
-    border-radius: 1rem;
-    box-sizing: border-box;
-  }
-  .matchUp {
-    height: 15rem;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-  .team {
-    height: 100%;
-    width: 45%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  .away {
-    flex-direction: row-reverse;
-  }
-  .teamLogo {
-    width: 30%;
-    height: 50%;
-    background-size: cover;
-  }
-  .teamWrapper {
-    flex: 1;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    margin: 0 1rem;
-  }
-  .teamName {
-    height: 50%;
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  .teamScore {
-    font-weight: bold;
-    font-size: 3.5rem;
-  }
-  .colon {
-    font-size: 4rem;
-    align-self: flex-end;
-  }
-  .quarter {
-    margin-top: 1rem;
-    display: flex;
-    font-size: 2rem;
-    justify-content: center;
-    position: relative;
-    font-weight: bold;
-  }
-  .timer {
-    position: absolute;
-    right: 10rem;
-  }
+<style lang="stylus" scoped>
+  .el-row
+    margin-bottom: 20px
+    .el-image
+      height: 5rem
+    .teamName
+      height: 3rem
+      font-weight: bold
+    .teamScore
+      font-size: 3rem
+      font-weight: bold
+    .colon
+      font-size: 3rem;
+    .quaterNum
+      font-size: 1.5rem;
+    .quarter
+      margin-top: 1rem;
+      display: flex;
+    .timer
+      width: 4.5rem
+      border: 1px solid black
+      padding: 0.2rem
+      border-radius: 5px
 </style>
