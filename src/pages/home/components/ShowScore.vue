@@ -90,6 +90,7 @@ export default {
       display: flex;
     .timer
       width: 4.5rem
+      height: 1rem
       border: 1px solid black
       padding: 0.2rem
       border-radius: 5px

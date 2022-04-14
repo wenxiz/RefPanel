@@ -17,13 +17,18 @@ export const myMixin = {
         this.start_disabled = false
         this.pause_disabled = true
         this.quarterInfo.quarterTime = 10
-        this.quarterInfo.selected > 4 ? alert('Game is finished!') : this.quarterInfo.selected++
+        this.quarterInfo.selected > 3 ? alert('Game is finished!') : this.quarterInfo.selected++
       } else {
         this.quarterInfo.quarterTime = (this.quarterInfo.quarterTime - 0.1).toFixed(1)
         if (this.quarterInfo.quarterTime > 60) {
           this.quarterInfo.formattedTime = this.formatTime(this.quarterInfo.quarterTime)
         } else {
           this.quarterInfo.formattedTime = this.quarterInfo.quarterTime
+          if (this.quarterInfo.quarterTime === '5.1') {
+            const countdown = 'static/sound/countdown-sound.mp3'
+            const countdownSound = new Audio(countdown)
+            countdownSound.play()
+          }
         }
       }
     }

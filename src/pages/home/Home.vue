@@ -43,7 +43,7 @@ export default {
       quarterInfo: {
         quarter: [1, 2, 3, 4],
         selected: 1,
-        quarterTime: 720
+        quarterTime: 6
       },
       homeTeam: {
         name: 'Miami Heat',
