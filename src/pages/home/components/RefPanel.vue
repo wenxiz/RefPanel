@@ -19,7 +19,8 @@
         <el-form-item label="Time Left:">
           <el-input
             v-model="quarterInfo.quarterTime"
-            style="width: 50%"></el-input>
+            style="width: 50%">
+          </el-input>
         </el-form-item>
         <el-form-item label="Quarter:">
           <el-select v-model="quarterInfo.selected" style="width: 50%">
@@ -86,6 +87,12 @@ export default {
       this.bus.$emit('change', this.pause)
     },
     handleStartClick () {
+      if (typeof this.quarterInfo.quarterTime === 'string') {
+        let formatQuarterTime = this.quarterInfo.quarterTime
+        let min = formatQuarterTime.substr(0, 2)
+        let sec = formatQuarterTime.substr(-2)
+        this.quarterInfo.quarterTime = Number(min) * 60 + Number(sec)
+      }
       this.start_disabled = true
       this.pause_disabled = false
       // counter
